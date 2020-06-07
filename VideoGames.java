@@ -2,9 +2,10 @@
 public class VideoGames {
 	private String isbn;
 	private String title;
+	private int year;
 	private String studioOrPublisher;
 	private String rating;
-	private int year;
+	
 
 	/**
 	 * Constructor for the Movie class
@@ -15,11 +16,12 @@ public class VideoGames {
 	 * @param gross    the amount grossed over the lifetime of the movie, given in
 	 *                 Millions of dollars
 	 */
-	public VideoGames(String isbn, String title, int year, double gross) {
+	public VideoGames(String isbn, String title, int year, String studio, String rating) {
 		this.isbn = isbn;
 		this.title = title;
 		this.year = year;
-		this.grossMillions = gross;
+		this.studioOrPublisher = studio;
+		this.rating = rating;
 	}
 
 	/**
@@ -36,8 +38,8 @@ public class VideoGames {
 	 *
 	 * @return the Movie's director
 	 */
-	public String getDirector() {
-		return director;
+	public String getIsbn() {
+		return isbn;
 	}
 
 	/**
@@ -54,8 +56,12 @@ public class VideoGames {
 	 *
 	 * @return the Movie's gross in Millions
 	 */
-	public double getGross() {
-		return grossMillions;
+	public String getStudioOrPublisher() {
+		return studioOrPublisher;
+	}
+	
+	public String getRating() {
+		return rating;
 	}
 
 	/**
@@ -72,8 +78,8 @@ public class VideoGames {
 	 *
 	 * @param director the Movie's director
 	 */
-	public void setDirector(String director) {
-		this.director = director;
+	public void setisbn(String isbn) {
+		this.isbn = isbn;
 	}
 
 	/**
@@ -90,8 +96,12 @@ public class VideoGames {
 	 *
 	 * @param gross the gross amount in Millions of dollars
 	 */
-	public void setGross(double gross) {
-		grossMillions = gross;
+	public void setStudioOrPublisher(String studio) {
+		this.studioOrPublisher = studio;
+	}
+	
+	public void setRating(String rating) {
+		this.rating = rating;
 	}
 
 	/**
@@ -103,8 +113,8 @@ public class VideoGames {
 	@Override
 	public String toString() {
 		String result = "";
-		result += "Title: " + title + "\nDirector: " + director + "\nYear: " + year + "\nGross in Millions: $"
-				+ grossMillions + "\n\n";
+		result += "ISBN: " + isbn + "\nTitle: " + title + "\nYear: " + year + "\nStudio or Publisher: "
+				+ studioOrPublisher + "\nRating: " + rating + "\n\n";
 		return result;
 	}
 
@@ -123,7 +133,7 @@ public class VideoGames {
 			return false;
 		} else {
 			VideoGames p = (VideoGames) o;
-			return title.equals(p.title) && director.equals(p.director);
+			return isbn.equals(p.isbn) && title.equals(p.title);
 		}
 
 	}
@@ -143,14 +153,14 @@ public class VideoGames {
 	public int compareTo(VideoGames otherMovie) {
 		if (this.equals(otherMovie)) {
 			return 0;
-		} else if (title.compareTo(otherMovie.title) < 0) {
+		} else if (isbn.compareTo(otherMovie.isbn) < 0) {
 			return -1;
-		} else if (title.compareTo(otherMovie.title) > 0) {
+		} else if (isbn.compareTo(otherMovie.isbn) > 0) {
 			return 1;
 		}
-		if (director.compareTo(otherMovie.director) < 0) {
+		if (title.compareTo(otherMovie.title) < 0) {
 			return -1;
-		} else if (director.compareTo(otherMovie.director) > 0) {
+		} else if (title.compareTo(otherMovie.title) > 0) {
 			return 1;
 		}
 		return 0;
@@ -164,7 +174,7 @@ public class VideoGames {
 	 */
 	@Override
 	public int hashCode() {
-		String key = title + director;
+		String key = isbn + title;
 		int sum = 0;
 		for (int i = 0; i < key.length(); i++) {
 			sum += (int) key.charAt(i);
